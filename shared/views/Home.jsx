@@ -1,6 +1,6 @@
 import React, { PropTypes }   from 'react';
-import TodosView              from './TodosView';
-import TodosForm              from './TodosForm';
+import TodosList              from 'components/TodosList';
+import TodosForm              from 'components/TodosForm';
 import { bindActionCreators } from 'redux';
 import * as TodoActions       from 'actions/TodoActions';
 import { connect }            from 'react-redux';
@@ -22,7 +22,7 @@ export default class Home extends React.Component {
 
     return (
       <div id="todo-list">
-        <TodosView todos={todos}
+        <TodosList todos={todos}
           {...bindActionCreators(TodoActions, dispatch)} />
 
         <TodosForm

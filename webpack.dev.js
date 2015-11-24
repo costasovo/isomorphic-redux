@@ -32,7 +32,16 @@ export default function(app) {
               }
             }
           }
-        }
+        },
+        {
+        test:    /\.scss$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
+          'autoprefixer?browsers=last 2 version',
+          'sass-loader'
+        ]
+      }
       ]
     },
     plugins: [

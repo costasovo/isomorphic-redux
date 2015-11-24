@@ -1,7 +1,7 @@
 import React                   from 'react';
 import { DefaultRoute, Route } from 'react-router';
-import App                     from 'components/index';
-import Home                    from 'components/Home';
+import App                     from 'layouts/index';
+import Home                    from 'views/Home';
 
 export default (
   <Route name="app" component={App} path="/">

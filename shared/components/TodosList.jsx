@@ -2,7 +2,7 @@ import React         from 'react';
 import { PropTypes } from 'react';
 import Immutable     from 'immutable';
 
-export default class TodosView extends React.Component {
+export default class TodosList extends React.Component {
   static propTypes = {
     todos:         PropTypes.instanceOf(Immutable.List).isRequired,
     editTodo:   PropTypes.func.isRequired,
