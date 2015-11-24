@@ -8,11 +8,14 @@ import { Provider }              from 'react-redux';
 import * as reducers             from 'reducers';
 import promiseMiddleware         from 'lib/promiseMiddleware';
 import fetchComponentData        from 'lib/fetchComponentData';
-import { createStore,
+import { compose,
+         createStore,
          combineReducers,
          applyMiddleware }       from 'redux';
 import path                      from 'path';
 import webpackDev                from './webpack.dev';
+import DevTools                  from 'devTools'; 
+
 
 const app = express();
 
@@ -25,7 +28,15 @@ if (process.env.NODE_ENV !== 'production') {
 app.use( (req, res) => {
   const location = createLocation(req.url);
   const reducer  = combineReducers(reducers);
-  const store    = applyMiddleware(promiseMiddleware)(createStore)(reducer);
+
+  const finalCreateStore = compose(
+    // Enables your middleware:
+    applyMiddleware(promiseMiddleware),
+    // Provides support for DevTools:
+    DevTools.instrument()
+  )(createStore);
+
+  const store = finalCreateStore(reducer);
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
     if(err) {
@@ -38,9 +49,12 @@ app.use( (req, res) => {
 
     function renderView() {
       const InitialView = (
-        <Provider store={store}>
-          <RoutingContext {...renderProps} />
-        </Provider>
+          <Provider store={store}>
+            <div>
+              <RoutingContext {...renderProps} />
+              <DevTools />
+            </div>
+          </Provider>
       );
 
       const componentHTML = renderToString(InitialView);

@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 
-
 export default class MainView extends React.Component {
   static propTypes = {
     children: PropTypes.object
