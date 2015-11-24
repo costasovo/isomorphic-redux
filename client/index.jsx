@@ -12,6 +12,8 @@ import { createStore,
          combineReducers,
          applyMiddleware }  from 'redux';
 
+import 'styles/style.scss';  
+
 const initialState = immutifyState(window.__INITIAL_STATE__);
 
 const history = createBrowserHistory();

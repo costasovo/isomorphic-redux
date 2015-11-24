@@ -1,4 +1,5 @@
 import webpack              from 'webpack';
+import path                 from 'path';
 import assign               from 'object-assign';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -12,7 +13,7 @@ export default function(app) {
     entry:   [
       'webpack-hot-middleware/client',
       './client'
-    ],
+    ], 
     module: {
       loaders: [
         {
@@ -38,11 +39,14 @@ export default function(app) {
         loaders: [
           'style-loader',
           'css-loader',
-          'autoprefixer?browsers=last 2 version',
+          'autoprefixer-loader?browsers=last 2 versions',
           'sass-loader'
         ]
       }
       ]
+    },
+    sassLoader: {
+      includePaths: [path.resolve(__dirname, '../shared/styles')]
     },
     plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
